@@ -32,6 +32,16 @@ $(document).ready( function(){
 
             var firstTimeConverted = moment().format('H:mm');
 
+             // Difference between the times
+            var diffTime = moment( (moment().diff(moment(startTime), "minutes") ) ).format("mm");
+
+             // Time apart (remainder)
+            var tRemainder = diffTime % frequency;
+
+            // Minute Until Train
+            var minutesAway = frequency - tRemainder;
+
+
             if (moment().isBefore(startTime) ){
               console.log("Current time is before: " + startTime);
 
@@ -45,15 +55,7 @@ $(document).ready( function(){
                .format('HH:mm');
             }
 
-            // Difference between the times
-            var diffTime = moment( (moment().diff(moment(startTime), "minutes") ) ).format("mm");
-
-             // Time apart (remainder)
-            var tRemainder = diffTime % frequency;
-
-            // Minute Until Train
-            var minutesAway = frequency - tRemainder;
-
+           
             //Next Arrival
             
 
