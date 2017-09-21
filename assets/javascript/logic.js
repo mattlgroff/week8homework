@@ -27,9 +27,23 @@ $(document).ready( function(){
     $.each(sv, function(index, value) {
 
             var startTime = parseInt(value.StartTime);
+
             var frequency = parseInt(value.Frequency);
 
             var firstTimeConverted = moment().format('H:mm');
+
+            if (moment().isBefore(startTime) ){
+              console.log("Current time is before: " + startTime);
+
+              var nextArrival = startTime;
+            }
+            else {
+              console.log("Current time is after: " + startTime);
+
+              var nextArrival = moment()
+               .add(minutesAway,'minutes')
+               .format('HH:mm');
+            }
 
             // Difference between the times
             var diffTime = moment( (moment().diff(moment(startTime), "minutes") ) ).format("mm");
@@ -41,9 +55,7 @@ $(document).ready( function(){
             var minutesAway = frequency - tRemainder;
 
             //Next Arrival
-            var nextArrival = moment()
-               .add(minutesAway,'minutes')
-               .format('HH:mm');
+            
 
             tr = $('<tr/>');
             tr.append("<td>" + value.TrainName + "</td>");
